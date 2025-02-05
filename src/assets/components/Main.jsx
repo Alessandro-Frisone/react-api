@@ -11,12 +11,18 @@ export default function Main() {
   }
   useEffect(fetchArticle, []);
 
+  function fetchDeleteArticle(id) {
+    axios.delete(`http://localhost:3000/bacheca/${id}`).then(() => {
+      setArticle((current) => current.filter((item) => item.id !== id));
+    });
+  }
+
   function deleteArticles() {
-    setArticle([])
+    setArticle([]);
   }
 
   function addArticles() {
-    fetchArticle()
+    fetchArticle();
   }
 
   return (
@@ -24,8 +30,12 @@ export default function Main() {
       <div className="container">
         <h1>LISTA</h1>
         <div className="btn-container">
-          <button onClick={deleteArticles} className="btn">DELETE</button>
-          <button onClick={addArticles} className="btn">MOSTRA LA LISTA</button>
+          <button onClick={deleteArticles} className="btn">
+            DELETE
+          </button>
+          <button onClick={addArticles} className="btn">
+            MOSTRA LA LISTA
+          </button>
         </div>
         <div className="list">
           <ul>
@@ -36,7 +46,10 @@ export default function Main() {
                 </p>
                 <p>{item.content}</p>
                 <p>{item.image}</p>
-                <p>{item.tags}</p>
+                <p>#{Array.isArray(item.tags) ? item.tags.join(" # ") : item.tags}</p>
+                <button onClick={fetchDeleteArticle} className="btn">
+                  DELETE
+                </button>
               </li>
             ))}
           </ul>

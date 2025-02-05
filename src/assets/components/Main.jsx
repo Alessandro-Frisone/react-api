@@ -11,9 +11,13 @@ export default function Main() {
   }
   useEffect(fetchArticle, []);
 
-  function deleteArticles() {}
+  function deleteArticles() {
+    setArticle([])
+  }
 
-  function addArticles() {}
+  function addArticles() {
+    fetchArticle()
+  }
 
   return (
     <main>

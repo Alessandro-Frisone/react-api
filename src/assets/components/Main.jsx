@@ -47,7 +47,7 @@ export default function Main() {
                 <p>{item.content}</p>
                 <p>{item.image}</p>
                 <p>#{Array.isArray(item.tags) ? item.tags.join(" # ") : item.tags}</p>
-                <button onClick={fetchDeleteArticle} className="btn">
+                <button onClick={ () => fetchDeleteArticle(item.id)} className="btn">
                   DELETE
                 </button>
               </li>

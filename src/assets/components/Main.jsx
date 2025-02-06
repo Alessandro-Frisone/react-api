@@ -1,18 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-
- const initialData = {
-    name: "",
-    content: "",
-    image: "",
-    tags: "",
-  };
-
+const initialData = {
+  name: "",
+  content: "",
+  image: "",
+  tags: "",
+};
 
 export default function Main() {
   const [article, setArticle] = useState([]);
-  const [user, setUser] = useState(initialData)
+  const [user, setUser] = useState(initialData);
 
   // MOSTRA IL CONTENUTO SOLO UNA VOLTA AL CARICAMENTO DELLA PAGINA
   useEffect(fetchArticle, []);
@@ -95,11 +93,11 @@ export default function Main() {
           </div>
         </div>
         <div className="form-container">
-          <h1>INSERISCI I DATI RICHISTI</h1>
+          <h1><strong>INSERISCI I DATI RICHISTI</strong></h1>
           <form onSubmit={handleSubmitForm} className="form">
             <p>INSERISCI IL TITOLO</p>
             <input
-            id="title"
+              id="title"
               className="area-testo"
               type="text"
               placeholder="Inserisci il titolo"
@@ -110,8 +108,9 @@ export default function Main() {
               required
             />
             <br />
+            <p>INSERISCI IL CONTENUTO</p>
             <input
-            id="content"
+              id="content"
               className="area-testo"
               type="text"
               placeholder="Inserisci il contenuto"
@@ -122,8 +121,9 @@ export default function Main() {
               required
             />
             <br />
+            <p>INSERISCI L'IMMAGINE</p>
             <input
-            id="image"
+              id="image"
               className="area-testo"
               type="text"
               placeholder="Inserisci un immagine"
@@ -134,8 +134,9 @@ export default function Main() {
               required
             />
             <br />
+            <p>INSERISCI I TAG</p>
             <input
-            id="tags"
+              id="tags"
               className="area-testo"
               type="text"
               placeholder="Inserisci i tags di riconoscimetno"
@@ -145,7 +146,7 @@ export default function Main() {
               }
               required
             />
-            <button type="submit">Salva</button>
+            <button type="submit" className="btn ">Salva</button>
           </form>
         </div>
       </div>

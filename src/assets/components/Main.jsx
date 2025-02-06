@@ -1,15 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Main() {
-  const [article, setArticle] = useState([]);
 
-  const initialData = {
+ const initialData = {
     name: "",
     content: "",
     image: "",
     tags: "",
   };
+
+
+export default function Main() {
+  const [article, setArticle] = useState([]);
+  const [user, setUser] = useState(initialData)
 
   // MOSTRA IL CONTENUTO SOLO UNA VOLTA AL CARICAMENTO DELLA PAGINA
   useEffect(fetchArticle, []);
@@ -31,13 +34,13 @@ export default function Main() {
   // FUNZIONE CHE CREA UN NUOVO ELEMENTO
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3001/bacheca", article).then((response) => {
-      setUsers((currentUsers) => [...currentUsers, response.data]);
-      setArticle(initialData);
+    axios.post("http://localhost:3000/bacheca", user).then((response) => {
+      setArticle((currentUsers) => [...currentUsers, response.data]);
+      setUser(initialData);
     });
   };
   const handleFormArticle = (fieldName, value) => {
-    setArticle((currentFormData) => {
+    setUser((currentFormData) => {
       return { ...currentFormData, [fieldName]: value };
     });
   };
@@ -92,7 +95,9 @@ export default function Main() {
           </div>
         </div>
         <div className="form-container">
+          <h1>INSERISCI I DATI RICHISTI</h1>
           <form onSubmit={handleSubmitForm} className="form">
+            <p>INSERISCI IL TITOLO</p>
             <input
               className="area-testo"
               type="text"

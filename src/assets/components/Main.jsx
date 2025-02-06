@@ -93,7 +93,9 @@ export default function Main() {
           </div>
         </div>
         <div className="form-container">
-          <h1><strong>INSERISCI I DATI RICHISTI</strong></h1>
+          <h1>
+            <strong>INSERISCI I DATI RICHISTI</strong>
+          </h1>
           <form onSubmit={handleSubmitForm} className="form">
             <p>INSERISCI IL TITOLO</p>
             <input
@@ -108,6 +110,7 @@ export default function Main() {
               required
             />
             <br />
+            <hr />
             <p>INSERISCI IL CONTENUTO</p>
             <input
               id="content"
@@ -121,6 +124,7 @@ export default function Main() {
               required
             />
             <br />
+            <hr />
             <p>INSERISCI L'IMMAGINE</p>
             <input
               id="image"
@@ -134,6 +138,7 @@ export default function Main() {
               required
             />
             <br />
+            <hr />
             <p>INSERISCI I TAG</p>
             <input
               id="tags"
@@ -146,7 +151,10 @@ export default function Main() {
               }
               required
             />
-            <button type="submit" className="btn ">Salva</button>
+            <hr />
+            <button type="submit" className="btn ">
+              Salva
+            </button>
           </form>
         </div>
       </div>

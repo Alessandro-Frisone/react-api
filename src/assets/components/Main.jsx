@@ -99,6 +99,7 @@ export default function Main() {
           <form onSubmit={handleSubmitForm} className="form">
             <p>INSERISCI IL TITOLO</p>
             <input
+            id="title"
               className="area-testo"
               type="text"
               placeholder="Inserisci il titolo"
@@ -106,36 +107,43 @@ export default function Main() {
               onChange={(event) =>
                 handleFormArticle("title", event.target.value)
               }
+              required
             />
             <br />
             <input
+            id="content"
               className="area-testo"
               type="text"
               placeholder="Inserisci il contenuto"
               value={article.content}
               onChange={(event) =>
-                handleFormArticle("title", event.target.value)
+                handleFormArticle("content", event.target.value)
               }
+              required
             />
             <br />
             <input
+            id="image"
               className="area-testo"
               type="text"
               placeholder="Inserisci un immagine"
               value={article.image}
               onChange={(event) =>
-                handleFormArticle("title", event.target.value)
+                handleFormArticle("image", event.target.value)
               }
+              required
             />
             <br />
             <input
+            id="tags"
               className="area-testo"
               type="text"
               placeholder="Inserisci i tags di riconoscimetno"
               value={article.tags}
               onChange={(event) =>
-                handleFormArticle("title", event.target.value)
+                handleFormArticle("tags", event.target.value)
               }
+              required
             />
             <button type="submit">Salva</button>
           </form>

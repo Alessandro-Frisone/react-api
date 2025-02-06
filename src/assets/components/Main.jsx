@@ -4,55 +4,136 @@ import { useState, useEffect } from "react";
 export default function Main() {
   const [article, setArticle] = useState([]);
 
+  const initialData = {
+    name: "",
+    content: "",
+    image: "",
+    tags: "",
+  };
+
+  // MOSTRA IL CONTENUTO SOLO UNA VOLTA AL CARICAMENTO DELLA PAGINA
+  useEffect(fetchArticle, []);
+
+  // MOSTRA IL CONTENUTO BACKEND
   function fetchArticle() {
     axios
       .get("http://localhost:3000/bacheca")
       .then((res) => setArticle(res.data));
   }
-  useEffect(fetchArticle, []);
 
+  // FUNZIONE CHE ELIMINA L'ELEMENTO SELEZIONATO
   function fetchDeleteArticle(id) {
     axios.delete(`http://localhost:3000/bacheca/${id}`).then(() => {
       setArticle((current) => current.filter((item) => item.id !== id));
     });
   }
 
+  // FUNZIONE CHE CREA UN NUOVO ELEMENTO
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    axios.post("http://localhost:3001/bacheca", article).then((response) => {
+      setUsers((currentUsers) => [...currentUsers, response.data]);
+      setArticle(initialData);
+    });
+  };
+  const handleFormArticle = (fieldName, value) => {
+    setArticle((currentFormData) => {
+      return { ...currentFormData, [fieldName]: value };
+    });
+  };
+
+  // FUNZIONE CHE SVUOTA L'ARRAY (UTILIZZATA SU UN BOTTONE)
   function deleteArticles() {
     setArticle([]);
   }
 
+  // FUNZIONE CHE MOSTRA GLI ELEMENTI (UTILIZZATA SU UN BOTTONE)
   function addArticles() {
     fetchArticle();
   }
 
   return (
     <main>
-      <div className="container">
-        <h1>LISTA</h1>
-        <div className="btn-container">
-          <button onClick={deleteArticles} className="btn">
-            DELETE
-          </button>
-          <button onClick={addArticles} className="btn">
-            MOSTRA LA LISTA
-          </button>
+      <div className="main-container">
+        <div className="container">
+          <h1>LISTA</h1>
+          <div className="btn-container">
+            <button onClick={deleteArticles} className="btn">
+              DELETE
+            </button>
+            <button onClick={addArticles} className="btn">
+              MOSTRA LA LISTA
+            </button>
+          </div>
+          <div className="list">
+            <ul>
+              {article.map((item) => (
+                <li key={item.title}>
+                  <p>
+                    <strong>{item.title}</strong>
+                  </p>
+                  <p>{item.content}</p>
+                  <img src={item.image} alt={item.title} />
+                  <p>
+                    #
+                    {Array.isArray(item.tags)
+                      ? item.tags.join(" # ")
+                      : item.tags}
+                  </p>
+                  <button
+                    onClick={() => fetchDeleteArticle(item.id)}
+                    className="btn btn-delete"
+                  >
+                    DELETE
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className="list">
-          <ul>
-            {article.map((item) => (
-              <li key={item.title}>
-                <p>
-                  <strong>{item.title}</strong>
-                </p>
-                <p>{item.content}</p>
-                <p>{item.image}</p>
-                <p>#{Array.isArray(item.tags) ? item.tags.join(" # ") : item.tags}</p>
-                <button onClick={ () => fetchDeleteArticle(item.id)} className="btn">
-                  DELETE
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className="form-container">
+          <form onSubmit={handleSubmitForm} className="form">
+            <input
+              className="area-testo"
+              type="text"
+              placeholder="Inserisci il titolo"
+              value={article.title}
+              onChange={(event) =>
+                handleFormArticle("title", event.target.value)
+              }
+            />
+            <br />
+            <input
+              className="area-testo"
+              type="text"
+              placeholder="Inserisci il contenuto"
+              value={article.content}
+              onChange={(event) =>
+                handleFormArticle("title", event.target.value)
+              }
+            />
+            <br />
+            <input
+              className="area-testo"
+              type="text"
+              placeholder="Inserisci un immagine"
+              value={article.image}
+              onChange={(event) =>
+                handleFormArticle("title", event.target.value)
+              }
+            />
+            <br />
+            <input
+              className="area-testo"
+              type="text"
+              placeholder="Inserisci i tags di riconoscimetno"
+              value={article.tags}
+              onChange={(event) =>
+                handleFormArticle("title", event.target.value)
+              }
+            />
+            <button type="submit">Salva</button>
+          </form>
         </div>
       </div>
     </main>

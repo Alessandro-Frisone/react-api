@@ -94,7 +94,7 @@ export default function Main() {
         </div>
         <div className="form-container">
           <h1>
-            <strong>INSERISCI I DATI RICHISTI</strong>
+            <strong>INSERISCI I DATI RICHIESTI</strong>
           </h1>
           <form onSubmit={handleSubmitForm} className="form">
             <p>INSERISCI IL TITOLO</p>
